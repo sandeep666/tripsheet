@@ -12,7 +12,7 @@
     "react-scripts": "3.1.1",
     "react-share": "^3.0.1"
   },
-  "homepage": "https://github.com/sandeep666/rostrWeb.git",
+  "homepage": "https://sandeep666.github.io/rostrWeb",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
