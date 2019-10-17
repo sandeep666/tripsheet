@@ -14,6 +14,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import HelpIcon from '@material-ui/icons/Help';
 import DirectionsIcon from '@material-ui/icons/Info';
+import ClickNHold from 'react-click-n-hold';
 
 
 const useStyles = makeStyles(theme => ({
@@ -27,6 +28,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 class MapContainer extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            tripStatus: 'Trip Status - NOT STARTED'
+        }
+    }
     classes = () => makeStyles(theme => ({
         button: {
             margin: theme.spacing(1),
@@ -61,10 +68,42 @@ class MapContainer extends Component {
     onInfoWindowClose = () => {
         console.log('test')
     }
+    start = (e) => {
+        console.log('START');
+        this.setState({
+            tripStatus: 'Hold for 3 seconds to initiate panic mode'
+        })
+    }
+
+    end = (e, enough) => {
+        console.log(enough);
+        console.log(enough ? 'Click released after enough time' : 'Click released too soon');
+        if (enough) {
+            /* this.setState({
+                tripStatus: 'Trip Status - NOT STARTED'
+            })
+            alert('Panic mode is initiated') */
+        }
+        else {
+            this.setState({
+                tripStatus: 'Trip Status - NOT STARTED'
+            })
+        }
+    }
+
+    clickNHold = (e) => {
+        console.log(e)
+        this.setState({
+            tripStatus: 'Trip Status - NOT STARTED'
+        })
+        alert('Panic mode is initiated')
+    }
+
+
     render() {
-        console.log(window.innerWidth)
+        //console.log(window.innerWidth)
         return (
-            <Grid container style={{ height: 540 }} >
+            <Grid container>
                 <Map
                     zoomControl={false}
                     mapTypeControl={false}
@@ -74,7 +113,7 @@ class MapContainer extends Component {
                     fullscreenControl={false}
                     google={this.props.google}
                     zoom={8}
-                    //style={mapStyles}
+                    style={mapStyles}
                     initialCenter={{ lat: 47.444, lng: -122.176 }}
                 >
                     <Marker position={{ lat: 48.00, lng: -122.00 }} />
@@ -86,7 +125,7 @@ class MapContainer extends Component {
                     <div style={{ marginTop: 200, position: 'absolute', }}>
                         <img style={{ width: 100, height: 40 }} src={require('../review.png')} />
                     </div> */}
-                    <div style={{ marginTop: 200, position: 'absolute', marginLeft : 12}}>
+                    <div style={{ marginTop: 200, position: 'absolute', marginLeft: 12 }}>
                         <img style={{ width: 100, height: 40 }} src={require('../review.png')} />
                     </div>
                 </Map>
@@ -103,8 +142,8 @@ class MapContainer extends Component {
                         width: window.width * 0.8,
                     }}>
                         <Typography style={{ fontSize: 10, margin: 12 }} >
-                            Trip Status - NOT STARTED
-                            </Typography>
+                            {this.state.tripStatus}
+                        </Typography>
                         <Typography style={{ fontSize: 10, margin: 12 }} >
                             OTP - 0000
                             </Typography>
@@ -115,9 +154,15 @@ class MapContainer extends Component {
                             height: 28,
                             margin: 4
                         }} orientation="vertical" />
-                        <IconButton color="primary" aria-label="directions">
-                            <DirectionsIcon />
-                        </IconButton>
+                        <ClickNHold
+                            time={3} // Time to keep pressing. Default is 2
+                            onStart={this.start} // Start callback
+                            onClickNHold={this.clickNHold} //Timeout callback
+                            onEnd={this.end} >
+                            <IconButton color="primary" aria-label="directions">
+                                <DirectionsIcon />
+                            </IconButton>
+                        </ClickNHold>
                     </Paper>
                 </Grid>
 
@@ -134,7 +179,7 @@ class MapContainer extends Component {
 
 const mapStyles = {
     width: '100%',
-    height: '90%',
+    height: '100%',
 };
 
 export default GoogleApiWrapper({

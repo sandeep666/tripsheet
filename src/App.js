@@ -17,6 +17,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
+import { messaging } from './push-notification';
 
 function Copyright() {
   return (
@@ -67,21 +68,33 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 
 
-function App() {
-  const classes = useStyles()
-  return (
-    <React.Fragment>
-      <CssBaseline />
-      <AppBar position="relative">
-        <Header />
-      </AppBar>
-      <main>
-        <MapContainer />
-      </main>
-      {/* Footer */}
-      {/* End footer */}
-    </React.Fragment>
-  );
+class App extends React.Component {
+  componentDidMount() {
+    messaging.requestPermission()
+      .then(async function () {
+        const token = await messaging.getToken();
+        console.log(token)
+      })
+      .catch(function (err) {
+        console.log("Unable to get permission to notify.", err);
+      });
+    navigator.serviceWorker.addEventListener("message", (message) => console.log(message));
+  }
+  render() {
+    return (
+      <React.Fragment>
+        <CssBaseline />
+        <AppBar position="relative">
+          <Header />
+        </AppBar>
+        <main>
+          <MapContainer />
+        </main>
+        {/* Footer */}
+        {/* End footer */}
+      </React.Fragment>
+    );
+  }
 }
 
 export default App;
