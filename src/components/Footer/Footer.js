@@ -80,7 +80,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function Header() {
+export default function Footer() {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -171,16 +171,19 @@ export default function Header() {
 
     return (
         <div className={classes.grow}>
-            <AppBar position="static">
+            <AppBar style={{ backgroundColor: '#FFF' }} position="static">
                 <Toolbar>
-                    <Avatar className={classes.bigAvatar} alt="Profile Picture" src={require('../jw.jpg')} />
+                    <Avatar className={classes.bigAvatar} alt="Profile Picture" src={'http://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802?d=identicon'} />
                     <div>
                         <Grid container
                             justify="center"
                             direction="column"
                             alignItems="flex-start">
-                            <Typography style={{ fontSize: 18, fontWeight: 'bold', }} >
-                                JW Marriott, Bengaluru
+                            <Typography style={{ fontSize: 14, fontWeight: 'bold', color: '#000' }} >
+                                Sandeep 4.8 <Star style={{ fontSize: 12, fontWeight: 'bold', color: 'gold' }} />
+                            </Typography>
+                            <Typography style={{ fontSize: 10, color: '#000' }} >
+                                Swift Desire - AP02 AT 0990
                             </Typography>
                         </Grid>
                     </div>
@@ -193,7 +196,35 @@ export default function Header() {
                             </Paper>
                         </Grid>
                     </div> */}
-
+                    <div className={classes.grow} />
+                    <div className={classes.sectionDesktop}>
+                        <IconButton aria-label="show 17 new notifications" color="inherit">
+                            <CallIcon />
+                        </IconButton>
+                        <IconButton onClick={_openShare} aria-label="show 4 new mails" color="inherit">
+                            <ShareIcon />
+                        </IconButton>
+                    </div>
+                    <div className={classes.sectionMobile}>
+                        <IconButton
+                            aria-label="show more"
+                            aria-controls={mobileMenuId}
+                            aria-haspopup="true"
+                            href={'tel:+919962260654'}
+                            color="inherit"
+                        >
+                            <CallIcon style={{ fontSize: 18, color: '#000' }} />
+                        </IconButton>
+                        <IconButton
+                            aria-label="show more"
+                            aria-controls={mobileMenuId}
+                            aria-haspopup="true"
+                            onClick={_openShare}
+                            color="inherit"
+                        >
+                            <ShareIcon style={{ fontSize: 18, color: '#000' }} />
+                        </IconButton>
+                    </div>
                 </Toolbar>
             </AppBar>
             {renderMobileMenu}

@@ -14,7 +14,14 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import HelpIcon from '@material-ui/icons/Help';
 import DirectionsIcon from '@material-ui/icons/Info';
+import Assignment from '@material-ui/icons/Assignment';
 import ClickNHold from 'react-click-n-hold';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
 
 
 const useStyles = makeStyles(theme => ({
@@ -31,7 +38,9 @@ class MapContainer extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            tripStatus: 'Trip Status - NOT STARTED'
+            tripStatus: 'Trip Status - NOT STARTED',
+            dialogOpen: false,
+            openNoteDialog: false
         }
     }
     classes = () => makeStyles(theme => ({
@@ -100,6 +109,19 @@ class MapContainer extends Component {
     }
 
 
+    handleClose = () => {
+        this.setState(prev => ({
+            dialogOpen: !prev.dialogOpen
+        }))
+    }
+
+    handleNoteDialog = () => {
+        this.setState(prev => ({
+            openNoteDialog: !prev.openNoteDialog
+        }))
+    }
+
+
     render() {
         //console.log(window.innerWidth)
         return (
@@ -126,7 +148,7 @@ class MapContainer extends Component {
                         <img style={{ width: 100, height: 40 }} src={require('../review.png')} />
                     </div> */}
                     <div style={{ marginTop: 200, position: 'absolute', marginLeft: 12 }}>
-                        <img style={{ width: 100, height: 40 }} src={require('../review.png')} />
+                        <a target="_" href={'https://search.google.com/local/writereview?placeid=ChIJSWBhxHkWrjsRK6iI2w8G5yE'}><img style={{ width: 100, height: 40 }} src={require('../review.png')} /></a>
                     </div>
                 </Map>
                 {/* <div style={{ marginTop: 100, position: 'absolute' }}>
@@ -144,10 +166,10 @@ class MapContainer extends Component {
                         <Typography style={{ fontSize: 10, margin: 12 }} >
                             {this.state.tripStatus}
                         </Typography>
-                        <Typography style={{ fontSize: 10, margin: 12 }} >
+                        {/* <Typography style={{ fontSize: 10, margin: 12 }} >
                             OTP - 0000
-                            </Typography>
-                        <IconButton color="primary" style={{ padding: 10 }} aria-label="Help">
+                            </Typography> */}
+                        <IconButton onClick={this.handleClose} color="primary" style={{ padding: 10 }} aria-label="Help">
                             <HelpIcon />
                         </IconButton>
                         <Divider style={{
@@ -155,24 +177,62 @@ class MapContainer extends Component {
                             margin: 4
                         }} orientation="vertical" />
                         <ClickNHold
-                            time={3} // Time to keep pressing. Default is 2
-                            onStart={this.start} // Start callback
-                            onClickNHold={this.clickNHold} //Timeout callback
-                            onEnd={this.end} >
-                            <IconButton color="primary" aria-label="directions">
-                                <DirectionsIcon />
+                        //time={3} // Time to keep pressing. Default is 2
+                        //onStart={this.start} // Start callback
+                        //onClickNHold={this.clickNHold} //Timeout callback
+                        //onEnd={this.end}
+                        >
+                            <IconButton onClick={this.handleNoteDialog} color="primary" aria-label="directions">
+                                <Assignment />
                             </IconButton>
                         </ClickNHold>
                     </Paper>
                 </Grid>
-
+                <Dialog
+                    open={this.state.dialogOpen}
+                    onClose={this.handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">{"Support"}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            Whatsapp : <a href="https://api.whatsapp.com/send?phone=+919380076257">+919380076257</a><br />
+                            Mobile :<a href="tel:919380076257" >+919380076257 </a> <br />
+                            Email : <a href="mailto:support@rostr.in">support@rostr.in</a>
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleClose} color="primary" autoFocus>
+                            OK
+          </Button>
+                    </DialogActions>
+                </Dialog>
+                <Dialog
+                    open={this.state.openNoteDialog}
+                    onClose={this.handleNoteDialog}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">{"Note"}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                        Pick up the customer at gate no.2 
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleNoteDialog} color="primary" autoFocus>
+                            OK
+          </Button>
+                    </DialogActions>
+                </Dialog>
                 {/* <Grid item xs={12} sm container style={{ position: 'absolute', justifyContent: 'flex-end', marginTop: 12, }}>
                     <div style={{ gridColumnEnd: 'span 12', width: window.innerWidth * 0.9, justifyContent: 'center' }}>
                         <Paper className={this.classes.paper}>trip</Paper>
                     </div>
                 </Grid> */}
 
-            </Grid>
+            </Grid >
         );
     }
 }

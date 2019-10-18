@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Header from './components/Header/Header'
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 import MapContainer from './components/Map/Map';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
@@ -59,7 +60,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
   },
   footer: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: 'black',
     padding: theme.spacing(6),
   },
 }));
@@ -81,8 +82,10 @@ class App extends React.Component {
     navigator.serviceWorker.addEventListener("message", (message) => console.log(message));
   }
   render() {
+
     return (
       <React.Fragment>
+
         <CssBaseline />
         <AppBar position="relative">
           <Header />
@@ -90,9 +93,17 @@ class App extends React.Component {
         <main>
           <MapContainer />
         </main>
-        {/* Footer */}
-        {/* End footer */}
-      </React.Fragment>
+        <Container style={{}}>
+        </Container>
+        <footer style={{
+          position: 'absolute',
+          bottom: 0,
+          width: '100%',
+          height: '60',
+        }} >
+          <Footer />
+        </footer>
+      </React.Fragment >
     );
   }
 }
