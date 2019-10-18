@@ -197,9 +197,9 @@ class MapContainer extends Component {
                     <DialogTitle id="alert-dialog-title">{"Support"}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">
-                            Whatsapp : <a href="https://api.whatsapp.com/send?phone=+919380076257">+919380076257</a><br />
-                            Mobile :<a href="tel:919380076257" >+919380076257 </a> <br />
-                            Email : <a href="mailto:support@rostr.in">support@rostr.in</a>
+                            Whatsapp : <a href="https://api.whatsapp.com/send?phone=+919380076257"> +919380076257</a><br /><br />
+                            Mobile :<a href="tel:919380076257" > +919380076257 </a> <br /><br />
+                            Email : <a href="mailto:support@rostr.in"> support@rostr.in</a>
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
@@ -217,7 +217,7 @@ class MapContainer extends Component {
                     <DialogTitle id="alert-dialog-title">{"Note"}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">
-                        Pick up the customer at gate no.2 
+                            Pick up the customer at gate no.2
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
