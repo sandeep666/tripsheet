@@ -134,11 +134,12 @@ class MapContainer extends Component {
                     rotateControl={false}
                     fullscreenControl={false}
                     google={this.props.google}
-                    zoom={8}
+                    zoom={12}
                     style={mapStyles}
-                    initialCenter={{ lat: 47.444, lng: -122.176 }}
+                    
+                    initialCenter={{ lat: 12.9388961, lng: 77.5825153 }}
                 >
-                    <Marker position={{ lat: 48.00, lng: -122.00 }} />
+                    <Marker position={{ lat: 12.9388961, lng: 77.5825153 }} />
                     {/* <div style={{ marginTop: 100, position: 'absolute' }}>
                         <IconButton aria-label="panic">
                             <Error style={{ fontSize: 40, color: 'black' }} />
