@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker, Polyline } from 'google-maps-react';
 import Error from '@material-ui/icons/Error';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -123,7 +123,19 @@ class MapContainer extends Component {
 
 
     render() {
-        //console.log(window.innerWidth)
+        //
+        const notes = this.props.data.notes
+        const source = this.props.data.source.location
+        const destination = this.props.data.destination.location
+        var points = [
+            { lat: source.lat, lng: source.long },
+            { lat: destination.lat, lng: destination.long },
+        ]
+        var bounds = new this.props.google.maps.LatLngBounds();
+        for (var i = 0; i < points.length; i++) {
+            bounds.extend(points[i]);
+        }
+        console.log(bounds)
         return (
             <Grid container>
                 <Map
@@ -134,12 +146,18 @@ class MapContainer extends Component {
                     rotateControl={false}
                     fullscreenControl={false}
                     google={this.props.google}
-                    zoom={12}
+                    zoom={10}
                     style={mapStyles}
-                    
-                    initialCenter={{ lat: 12.9388961, lng: 77.5825153 }}
+                    initialCenter={{ lat: destination.lat, lng: destination.long }}
+                    bounds
                 >
-                    <Marker position={{ lat: 12.9388961, lng: 77.5825153 }} />
+                    <Polyline
+                        path={points}
+                        strokeColor="#0000FF"
+                        strokeOpacity={0.8}
+                        strokeWeight={2} />
+                    <Marker position={{ lat: source.lat, lng: source.long }} />
+                    <Marker position={{ lat: destination.lat, lng: destination.long }} />
                     {/* <div style={{ marginTop: 100, position: 'absolute' }}>
                         <IconButton aria-label="panic">
                             <Error style={{ fontSize: 40, color: 'black' }} />
@@ -210,6 +228,8 @@ class MapContainer extends Component {
                     </DialogActions>
                 </Dialog>
                 <Dialog
+                    fullWidth={true}
+                    maxWidth={true}
                     open={this.state.openNoteDialog}
                     onClose={this.handleNoteDialog}
                     aria-labelledby="alert-dialog-title"
@@ -218,7 +238,7 @@ class MapContainer extends Component {
                     <DialogTitle id="alert-dialog-title">{"Note"}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">
-                            Pick up the customer at gate no.2
+                            {notes}
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>

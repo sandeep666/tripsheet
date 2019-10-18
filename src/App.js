@@ -19,6 +19,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import { messaging } from './push-notification';
+import axios from 'axios'
 
 function Copyright() {
   return (
@@ -70,7 +71,17 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 
 class App extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      trip: undefined,
+      loaded: false
+    }
+  }
+
   componentDidMount() {
+    this.getTripInfo()
     messaging.requestPermission()
       .then(async function () {
         const token = await messaging.getToken();
@@ -81,17 +92,33 @@ class App extends React.Component {
       });
     navigator.serviceWorker.addEventListener("message", (message) => console.log(message));
   }
-  render() {
 
+
+  getTripInfo = () => {
+    const Token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYTQ3M2QxNzAwZWI2MzlkYTI2NWY5NyIsImlhdCI6MTU3MTA1ODY0MX0.wu9cu62G9NmQIo1XX8Sd79abohDSjBJGFsukD7RLaJs'
+    axios.get('http://ec2-13-250-126-239.ap-southeast-1.compute.amazonaws.com/trips/trip/5da5ca97ed8ef24af172e8f4', {
+      headers: {
+        Authorization: `Bearer ${Token}`
+      }
+    }).then(d => {
+      console.log('trips', d)
+      this.setState({ trip: d.data, loaded: true })
+    })
+  }
+
+
+  render() {
     return (
       <React.Fragment>
-
         <CssBaseline />
         <AppBar position="relative">
-          <Header />
+          {this.state.loaded ?
+            <Header data={this.state.trip} /> :
+            <Fragment />}
         </AppBar>
         <main>
-          <MapContainer />
+          {this.state.loaded ?
+            <MapContainer data={this.state.trip} /> : <Fragment />}
         </main>
         <Container style={{}}>
         </Container>
@@ -101,7 +128,7 @@ class App extends React.Component {
           width: '100%',
           height: '60',
         }} >
-          <Footer />
+          {this.state.loaded ? <Footer data={this.state.trip} /> : <Fragment />}
         </footer>
       </React.Fragment >
     );

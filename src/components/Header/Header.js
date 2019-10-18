@@ -80,13 +80,14 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function Header() {
+export default function Header(props) {
     const classes = useStyles();
+    const transpoterName = props.data.transporter.name
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
+    const profileImage = 'profileImage' in props.data.transporter ? props.data.transporter.profileImage : 'http://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802?d=identicon'
     function handleProfileMenuOpen(event) {
         setAnchorEl(event.currentTarget);
     }
@@ -173,14 +174,14 @@ export default function Header() {
         <div className={classes.grow}>
             <AppBar position="static">
                 <Toolbar>
-                    <Avatar className={classes.bigAvatar} alt="Profile Picture" src={require('../jw.jpg')} />
+                    <Avatar className={classes.bigAvatar} alt="Profile Picture" src={profileImage} />
                     <div>
                         <Grid container
                             justify="center"
                             direction="column"
                             alignItems="flex-start">
                             <Typography style={{ fontSize: 18, fontWeight: 'bold', }} >
-                                JW Marriott, Bengaluru
+                                {transpoterName}
                             </Typography>
                         </Grid>
                     </div>

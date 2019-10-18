@@ -80,7 +80,12 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function Footer() {
+export default function Footer(props) {
+    console.log('Footer', props)
+    const driverName = props.data.driver.name;
+    const driverNumber = props.data.driver.mobileNo
+    const vehicleType = 'vehicle' in props.data ? props.data.vehicle.vehicleType : ''
+    const vehicleNumber = 'vehicle' in props.data ? props.data.vehicle.regNumber : ''
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -171,7 +176,7 @@ export default function Footer() {
 
     return (
         <div className={classes.grow}>
-            <AppBar style={{ backgroundColor: '#FFF' }} position="static">
+            <AppBar style={{ backgroundColor: '#fff' }} position="static">
                 <Toolbar>
                     <Avatar className={classes.bigAvatar} alt="Profile Picture" src={'http://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802?d=identicon'} />
                     <div>
@@ -180,10 +185,10 @@ export default function Footer() {
                             direction="column"
                             alignItems="flex-start">
                             <Typography style={{ fontSize: 14, fontWeight: 'bold', color: '#000' }} >
-                                Sandeep 4.8 <Star style={{ fontSize: 12, fontWeight: 'bold', color: 'gold' }} />
+                                {driverName} 
                             </Typography>
                             <Typography style={{ fontSize: 10, color: '#000' }} >
-                                Swift Desire - AP02 AT 0990
+                                {vehicleType} - {vehicleNumber}
                             </Typography>
                         </Grid>
                     </div>
@@ -198,7 +203,7 @@ export default function Footer() {
                     </div> */}
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>
-                        <IconButton aria-label="show 17 new notifications" color="inherit">
+                        <IconButton aria-label="show 17 new notifications" color="#000">
                             <CallIcon />
                         </IconButton>
                         <IconButton onClick={_openShare} aria-label="show 4 new mails" color="inherit">
@@ -207,22 +212,24 @@ export default function Footer() {
                     </div>
                     <div className={classes.sectionMobile}>
                         <IconButton
+                            style={{ color: '#000' }}
                             aria-label="show more"
                             aria-controls={mobileMenuId}
                             aria-haspopup="true"
-                            href={'tel:+919962260654'}
+                            href={`tel:${driverNumber}`}
                             color="inherit"
                         >
-                            <CallIcon style={{ fontSize: 18, color: '#000' }} />
+                            <CallIcon style={{ fontSize: 18, }} />
                         </IconButton>
                         <IconButton
+                            style={{ color: '#000' }}
                             aria-label="show more"
                             aria-controls={mobileMenuId}
                             aria-haspopup="true"
                             onClick={_openShare}
                             color="inherit"
                         >
-                            <ShareIcon style={{ fontSize: 18, color: '#000' }} />
+                            <ShareIcon style={{ fontSize: 18, }} />
                         </IconButton>
                     </div>
                 </Toolbar>
