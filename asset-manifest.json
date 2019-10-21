@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/sandeep666/tripsheet.git/static/css/main.2cce8147.chunk.css",
-    "main.js": "/sandeep666/tripsheet.git/static/js/main.35c10e1b.chunk.js",
-    "main.js.map": "/sandeep666/tripsheet.git/static/js/main.35c10e1b.chunk.js.map",
-    "runtime~main.js": "/sandeep666/tripsheet.git/static/js/runtime~main.0db144e3.js",
-    "runtime~main.js.map": "/sandeep666/tripsheet.git/static/js/runtime~main.0db144e3.js.map",
-    "static/js/2.37d31efe.chunk.js": "/sandeep666/tripsheet.git/static/js/2.37d31efe.chunk.js",
-    "static/js/2.37d31efe.chunk.js.map": "/sandeep666/tripsheet.git/static/js/2.37d31efe.chunk.js.map",
-    "index.html": "/sandeep666/tripsheet.git/index.html",
-    "precache-manifest.6a35abbd328ffb98c3a1a64ca111aaa3.js": "/sandeep666/tripsheet.git/precache-manifest.6a35abbd328ffb98c3a1a64ca111aaa3.js",
-    "service-worker.js": "/sandeep666/tripsheet.git/service-worker.js",
-    "static/css/main.2cce8147.chunk.css.map": "/sandeep666/tripsheet.git/static/css/main.2cce8147.chunk.css.map",
-    "static/media/404.png": "/sandeep666/tripsheet.git/static/media/404.c86fb8f0.png",
-    "static/media/logo.svg": "/sandeep666/tripsheet.git/static/media/logo.5d5d9eef.svg",
-    "static/media/review.png": "/sandeep666/tripsheet.git/static/media/review.d7620c6c.png"
+    "main.css": "/tripsheet/static/css/main.2cce8147.chunk.css",
+    "main.js": "/tripsheet/static/js/main.9047ac12.chunk.js",
+    "main.js.map": "/tripsheet/static/js/main.9047ac12.chunk.js.map",
+    "runtime~main.js": "/tripsheet/static/js/runtime~main.a8e19454.js",
+    "runtime~main.js.map": "/tripsheet/static/js/runtime~main.a8e19454.js.map",
+    "static/js/2.37d31efe.chunk.js": "/tripsheet/static/js/2.37d31efe.chunk.js",
+    "static/js/2.37d31efe.chunk.js.map": "/tripsheet/static/js/2.37d31efe.chunk.js.map",
+    "index.html": "/tripsheet/index.html",
+    "precache-manifest.3c21ea0063538fed4cd09b500bf84d23.js": "/tripsheet/precache-manifest.3c21ea0063538fed4cd09b500bf84d23.js",
+    "service-worker.js": "/tripsheet/service-worker.js",
+    "static/css/main.2cce8147.chunk.css.map": "/tripsheet/static/css/main.2cce8147.chunk.css.map",
+    "static/media/404.png": "/tripsheet/static/media/404.c86fb8f0.png",
+    "static/media/logo.svg": "/tripsheet/static/media/logo.5d5d9eef.svg",
+    "static/media/review.png": "/tripsheet/static/media/review.d7620c6c.png"
   }
 }
