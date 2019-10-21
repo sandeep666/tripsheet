@@ -87,7 +87,8 @@ export default function Header(props) {
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-    const profileImage = 'profileImage' in props.data.transporter ? props.data.transporter.profileImage : 'http://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802?d=identicon'
+    const profileImage = 'profileImage' in props.data.transporter ? `http://ec2-13-250-126-239.ap-southeast-1.compute.amazonaws.com${props.data.transporter.profileImage}` : 'http://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802?d=identicon'
+    console.log(profileImage)
     function handleProfileMenuOpen(event) {
         setAnchorEl(event.currentTarget);
     }
@@ -171,7 +172,7 @@ export default function Header(props) {
 
 
     return (
-        <div className={classes.grow}>
+        < div className={classes.grow} >
             <AppBar position="static">
                 <Toolbar>
                     <Avatar className={classes.bigAvatar} alt="Profile Picture" src={profileImage} />
@@ -199,6 +200,6 @@ export default function Header(props) {
             </AppBar>
             {renderMobileMenu}
             {renderMenu}
-        </div>
+        </div >
     );
 }

@@ -95,7 +95,7 @@ class main extends React.Component {
 
     getTripInfo = (id) => {
         const Token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYTQ3M2QxNzAwZWI2MzlkYTI2NWY5NyIsImlhdCI6MTU3MTA1ODY0MX0.wu9cu62G9NmQIo1XX8Sd79abohDSjBJGFsukD7RLaJs'
-        axios.get(`https://api.tripsheet.in/trips/trip/${id}`, {
+        axios.get(`http://ec2-13-250-126-239.ap-southeast-1.compute.amazonaws.com/trips/trip/${id}`, {
             headers: {
                 Authorization: `Bearer ${Token}`
             }
