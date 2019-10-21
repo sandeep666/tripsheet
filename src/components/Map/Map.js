@@ -124,9 +124,13 @@ class MapContainer extends Component {
 
     render() {
         //
-        const notes = this.props.data.notes
-        const source = this.props.data.source.location
-        const destination = this.props.data.destination.location
+        const notes = 'notes' in this.props.data ? this.props.data.notes : ''
+        const source = 'source' in this.props.data ? this.props.data.source.location : ''
+        const destination = 'destination' in this.props.data ? this.props.data.destination.location : ''
+        const supportWhatsapp = "+91" + this.props.data.transporter.support.whatsApp
+        const supportEmail = 'transporter' in this.props.data ? this.props.data.transporter.support.email : ''
+        const supportNumber = 'transporter' in this.props.data ? this.props.data.transporter.support.contactNumber : ''
+        const placeId = 'transporter' in this.props.data ? this.props.data.transporter.placeId : ''
         var points = [
             { lat: source.lat, lng: source.long },
             { lat: destination.lat, lng: destination.long },
@@ -167,7 +171,7 @@ class MapContainer extends Component {
                         <img style={{ width: 100, height: 40 }} src={require('../review.png')} />
                     </div> */}
                     <div style={{ marginTop: 200, position: 'absolute', marginLeft: 12 }}>
-                        <a target="_" href={'https://search.google.com/local/writereview?placeid=ChIJSWBhxHkWrjsRK6iI2w8G5yE'}><img style={{ width: 100, height: 40 }} src={require('../review.png')} /></a>
+                        <a target="_" href={`https://search.google.com/local/writereview?placeid=${placeId}`}><img style={{ width: 100, height: 40 }} src={require('../review.png')} /></a>
                     </div>
                 </Map>
                 {/* <div style={{ marginTop: 100, position: 'absolute' }}>
@@ -216,9 +220,9 @@ class MapContainer extends Component {
                     <DialogTitle id="alert-dialog-title">{"Support"}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">
-                            Whatsapp : <a href="https://api.whatsapp.com/send?phone=+919380076257"> +919380076257</a><br /><br />
-                            Mobile :<a href="tel:919380076257" > +919380076257 </a> <br /><br />
-                            Email : <a href="mailto:support@rostr.in"> support@rostr.in</a>
+                            Whatsapp : <a href={`https://api.whatsapp.com/send?phone=${supportWhatsapp}`}> {supportWhatsapp}</a><br /><br />
+                            Mobile :<a href={`tel:${supportNumber}`} > {supportNumber} </a> <br /><br />
+                            Email : <a href={`mailto:${supportEmail}`}> {supportEmail}</a>
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
